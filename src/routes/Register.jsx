@@ -16,7 +16,7 @@ function Register() {
           {/*  */}
           <a
             className="mainBtn registerPayBtn"
-            href="https://paystack.com/pay/missbellezanigeria2020"
+            href="https://paystack.com/pay/missbellezanigeria2021"
           >
             Pay Now/Register
           </a>

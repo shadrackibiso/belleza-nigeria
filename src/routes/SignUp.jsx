@@ -148,9 +148,9 @@ function SignUp() {
             email from us soon. Good luck!
           </span>
         </div>
-        <NavLink to="/" style={{ display: !profileCreated && "none" }}>
+        <a href="https://missbellezanigeria.com.ng/" style={{ display: !profileCreated && "none" }}>
           <button className="secondaryBtn">Done</button>
-        </NavLink>
+        </a>
       </div>
     </div>
   );

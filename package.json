@@ -1,9 +1,6 @@
 {
-<<<<<<< HEAD
-  "name": "demo2",
-=======
   "name": "belleza",
->>>>>>> 4ab618340c1caa3fe3b89682bc2db77f22ad6c8f
+  "homepage": "https://missbellezanigeria.com.ng/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,10 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-<<<<<<< HEAD
     "react-paystack": "^3.0.1",
-=======
->>>>>>> 4ab618340c1caa3fe3b89682bc2db77f22ad6c8f
     "react-scripts": "3.4.1"
   },
   "scripts": {

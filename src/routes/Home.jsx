@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Banner from "../components/Banner";
 import Prizes from "../components/Prizes";
 import Eligibility from "../components/Eligibility";
-import Partners from "../components/Partners";
+// import Partners from "../components/Partners";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
@@ -15,7 +15,7 @@ function Home() {
       <Banner />
       <Prizes />
       <Eligibility />
-      <Partners />
+      {/* <Partners /> */}
       <Contact />
       <Footer />
     </div>

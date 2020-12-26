@@ -5,69 +5,69 @@ import "../css/contestants.css";
 import avatar from "../images/avatar.png";
 import firebase from "firebase/app";
 import ReactLoading from "react-loading";
-// import {
-//   MdCheckCircle,
-//   MdKeyboardArrowDown,
-//   MdKeyboardArrowUp,
-// } from "react-icons/md";
-// import { PaystackButton } from "react-paystack";
-// import { v4 as uuidv4 } from "uuid";
+import {
+  MdCheckCircle,
+  MdKeyboardArrowDown,
+  MdKeyboardArrowUp,
+} from "react-icons/md";
+import { PaystackButton } from "react-paystack";
+import { v4 as uuidv4 } from "uuid";
 
 function Contestants() {
-  const [contestants, setContestants] = useState(null);
-  // const [selectedTab, displayTab] = useState(1);
-  // const [displayModal, setDisplayModal] = useState(false);
-  // const [selectedContestant, setSelectedContestant] = useState(null);
-  // const [searchValue, setSearchValue] = useState("");
-  // const [searchResult, setSearchResult] = useState();
-  // const [contestants, setContestants] = useState([
-  //   {
-  //     id: "1",
-  //     name: "cassandra shadrack",
-  //     age: "19",
-  //     state: "rivers state",
-  //     votes: 2500,
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Diana prince",
-  //     age: "19",
-  //     state: "rivers state",
-  //     votes: 190,
-  //   },
-  //   {
-  //     id: "3",
-  //     name: "angel hart",
-  //     age: "19",
-  //     state: "rivers state",
-  //     votes: 87,
-  //   },
-  // ]);
+  // const [contestants, setContestants] = useState(null);
+  const [selectedTab, displayTab] = useState(1);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [selectedContestant, setSelectedContestant] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [searchResult, setSearchResult] = useState();
+  const [contestants, setContestants] = useState([
+    {
+      id: "1",
+      name: "cassandra shadrack",
+      age: "19",
+      state: "rivers state",
+      votes: 2500,
+    },
+    {
+      id: "2",
+      name: "Diana prince",
+      age: "19",
+      state: "rivers state",
+      votes: 190,
+    },
+    {
+      id: "3",
+      name: "angel hart",
+      age: "19",
+      state: "rivers state",
+      votes: 87,
+    },
+  ]);
 
   // fetch data
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection("users")
-      .get()
-      .then((data) => {
-        let users = [];
-        data.forEach((doc) => {
-          users.push(doc.data());
-        });
-        setContestants(users);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  // useEffect(() => {
+  //   firebase
+  //     .firestore()
+  //     .collection("users")
+  //     .get()
+  //     .then((data) => {
+  //       let users = [];
+  //       data.forEach((doc) => {
+  //         users.push(doc.data());
+  //       });
+  //       setContestants(users);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
 
-  // const search = () => {
-  //   let searchResult =
-  //     contestants &&
-  //     contestants.filter((cts) =>
-  //       cts.name.toLowerCase().includes(searchValue.toLowerCase())
-  //     );
-  //   setSearchResult(searchResult);
-  // };
+  const search = () => {
+    let searchResult =
+      contestants &&
+      contestants.filter((cts) =>
+        cts.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    setSearchResult(searchResult);
+  };
 
   const Loader = () => (
     <div className="dataLoader mt-3" style={{ display: contestants && "none" }}>
@@ -77,125 +77,125 @@ function Contestants() {
     </div>
   );
 
-  // const SuccessModal = (props) => (
-  //   <div className="successModal" style={{ display: !displayModal && "none" }}>
-  //     <div className="modalBlind"></div>
-  //     <div className="modalContainer">
-  //       <div className="successModalImage">
-  //         {/* profile created icon */}
-  //         <span>
-  //           <MdCheckCircle />
-  //         </span>
-  //       </div>
-  //       <div className="successModalMessage">
-  //         <span>You've successfully voted for {props.name}</span>
-  //         <p>
-  //           Please don't panic if you're vote doesn't reflect immediately, it
-  //           might take some time to process. Thank you.
-  //         </p>
-  //       </div>
-  //       <button className="secondaryBtn" onClick={() => setDisplayModal(false)}>
-  //         Done
-  //       </button>
-  //     </div>
-  //   </div>
-  // );
+  const SuccessModal = (props) => (
+    <div className="successModal" style={{ display: !displayModal && "none" }}>
+      <div className="modalBlind"></div>
+      <div className="modalContainer">
+        <div className="successModalImage">
+          {/* profile created icon */}
+          <span>
+            <MdCheckCircle />
+          </span>
+        </div>
+        <div className="successModalMessage">
+          <span>You've successfully voted for {props.name}</span>
+          <p>
+            Please don't panic if you're vote doesn't reflect immediately, it
+            might take some time to process. Thank you.
+          </p>
+        </div>
+        <button className="secondaryBtn" onClick={() => setDisplayModal(false)}>
+          Done
+        </button>
+      </div>
+    </div>
+  );
 
   const ContestantCard = (props) => {
-    // const [displayVoteForm, setDisplayVoteForm] = useState(false);
+    const [displayVoteForm, setDisplayVoteForm] = useState(false);
     // paystack payment
-    // const publicKey = "pk_live_25afddd9c879b95a84956f01333bec6062ba81b8";
+    const publicKey = "pk_live_25afddd9c879b95a84956f01333bec6062ba81b8";
     // const publicKey = "pk_test_8ecbac418f27432bf99e076ae8e5e05e244499d2";
-    // const [amount, setAmount] = useState(5000);
-    // const [email, setEmail] = useState("");
-    // const [name, setName] = useState("");
-    // const handleSuccessfulPayment = () => {
-    //   let amountPaid = amount / 100;
-    //   setContestants(
-    //     contestants.map((cts) => {
-    //       if (cts.id === props.id && amountPaid === 50) {
-    //         firebase
-    //           .firestore()
-    //           .collection("users")
-    //           .doc(`${cts.name}-${cts.id}`)
-    //           .update({
-    //             votes: firebase.firestore.FieldValue.increment(1),
-    //           })
-    //           .catch((error) => console.log(error));
-    //         cts.votes += 1;
-    //       }
-    //       if (cts.id === props.id && amountPaid === 500) {
-    //         firebase
-    //           .firestore()
-    //           .collection("users")
-    //           .doc(`${cts.name}-${cts.id}`)
-    //           .update({
-    //             votes: firebase.firestore.FieldValue.increment(10),
-    //           })
-    //           .catch((error) => console.log(error));
-    //         cts.votes += 10;
-    //       }
-    //       if (cts.id === props.id && amountPaid === 1000) {
-    //         firebase
-    //           .firestore()
-    //           .collection("users")
-    //           .doc(`${cts.name}-${cts.id}`)
-    //           .update({
-    //             votes: firebase.firestore.FieldValue.increment(20),
-    //           })
-    //           .catch((error) => console.log(error));
-    //         cts.votes += 20;
-    //       }
-    //       if (cts.id === props.id && amountPaid === 2500) {
-    //         firebase
-    //           .firestore()
-    //           .collection("users")
-    //           .doc(`${cts.name}-${cts.id}`)
-    //           .update({
-    //             votes: firebase.firestore.FieldValue.increment(50),
-    //           })
-    //           .catch((error) => console.log(error));
-    //         cts.votes += 50;
-    //       }
-    //       if (cts.id === props.id && amountPaid === 5000) {
-    //         firebase
-    //           .firestore()
-    //           .collection("users")
-    //           .doc(`${cts.name}-${cts.id}`)
-    //           .update({
-    //             votes: firebase.firestore.FieldValue.increment(100),
-    //           })
-    //           .catch((error) => console.log(error));
-    //         cts.votes += 100;
-    //       }
-    //       if (cts.id === props.id && amountPaid === 10000) {
-    //         firebase
-    //           .firestore()
-    //           .collection("users")
-    //           .doc(`${cts.name}-${cts.id}`)
-    //           .update({
-    //             votes: firebase.firestore.FieldValue.increment(200),
-    //           })
-    //           .catch((error) => console.log(error));
-    //         cts.votes += 200;
-    //       }
-    //       return cts;
-    //     })
-    //   );
-    //   setSelectedContestant(props);
-    //   setDisplayModal(true);
-    // };
-    // const refName = name.split(" ").join("-");
-    // const reference = `${refName}-${uuidv4()}`;
-    // const componentProps = {
-    //   email,
-    //   amount,
-    //   reference,
-    //   publicKey,
-    //   text: "vote",
-    //   onSuccess: () => handleSuccessfulPayment(),
-    //   onClose: () => alert("oops! we couldn't process your vote."),
-    // };
+    const [amount, setAmount] = useState(5000);
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const handleSuccessfulPayment = () => {
+      let amountPaid = amount / 100;
+      setContestants(
+        contestants.map((cts) => {
+          if (cts.id === props.id && amountPaid === 50) {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(`${cts.name}-${cts.id}`)
+              .update({
+                votes: firebase.firestore.FieldValue.increment(1),
+              })
+              .catch((error) => console.log(error));
+            cts.votes += 1;
+          }
+          if (cts.id === props.id && amountPaid === 500) {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(`${cts.name}-${cts.id}`)
+              .update({
+                votes: firebase.firestore.FieldValue.increment(10),
+              })
+              .catch((error) => console.log(error));
+            cts.votes += 10;
+          }
+          if (cts.id === props.id && amountPaid === 1000) {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(`${cts.name}-${cts.id}`)
+              .update({
+                votes: firebase.firestore.FieldValue.increment(20),
+              })
+              .catch((error) => console.log(error));
+            cts.votes += 20;
+          }
+          if (cts.id === props.id && amountPaid === 2500) {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(`${cts.name}-${cts.id}`)
+              .update({
+                votes: firebase.firestore.FieldValue.increment(50),
+              })
+              .catch((error) => console.log(error));
+            cts.votes += 50;
+          }
+          if (cts.id === props.id && amountPaid === 5000) {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(`${cts.name}-${cts.id}`)
+              .update({
+                votes: firebase.firestore.FieldValue.increment(100),
+              })
+              .catch((error) => console.log(error));
+            cts.votes += 100;
+          }
+          if (cts.id === props.id && amountPaid === 10000) {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(`${cts.name}-${cts.id}`)
+              .update({
+                votes: firebase.firestore.FieldValue.increment(200),
+              })
+              .catch((error) => console.log(error));
+            cts.votes += 200;
+          }
+          return cts;
+        })
+      );
+      setSelectedContestant(props);
+      setDisplayModal(true);
+    };
+    const refName = name.split(" ").join("-");
+    const reference = `${refName}-${uuidv4()}`;
+    const componentProps = {
+      email,
+      amount,
+      reference,
+      publicKey,
+      text: "vote",
+      onSuccess: () => handleSuccessfulPayment(),
+      onClose: () => alert("oops! we couldn't process your vote."),
+    };
     return (
       <div className="col-lg-3 col-md-6">
         <div className="ctsCard">
@@ -228,7 +228,7 @@ function Contestants() {
               {props.votes}
             </div>
           </div>
-          {/* <div
+          <div
             className="ctsCardVoteBtn"
             onClick={() => setDisplayVoteForm((prevState) => !prevState)}
           >
@@ -272,7 +272,7 @@ function Contestants() {
               <option value="1000000">200 votes (N10000)</option>
             </select>
             <PaystackButton {...componentProps} />
-          </form> */}
+          </form>
         </div>
       </div>
     );
@@ -281,14 +281,14 @@ function Contestants() {
   return (
     <>
       <Navbar />
-      {/* <SuccessModal {...selectedContestant} /> */}
+      <SuccessModal {...selectedContestant} />
       <div className="contestants section">
         {/* <!-- label --> */}
-        <div className="label">Ranking</div>
+        <div className="label">Contestants</div>
         <div className="labelLine"></div>
 
         {/* tab */}
-        {/* <div className="tab">
+        <div className="tab">
           <div
             onClick={() => displayTab(1)}
             className={selectedTab === 1 ? "activeTab" : ""}
@@ -301,10 +301,10 @@ function Contestants() {
           >
             ranking
           </div>
-        </div> */}
+        </div>
 
         {/* search bar */}
-        {/* <form
+        <form
           className="ctsSearchForm"
           style={{ display: selectedTab !== 1 && "none" }}
         >
@@ -318,12 +318,12 @@ function Contestants() {
               search();
             }}
           />
-        </form> */}
+        </form>
 
         {/* contestants */}
         <div
           className="ctsCardContainer row"
-          // style={{ display: selectedTab !== 1 && "none" }}
+          style={{ display: selectedTab !== 1 && "none" }}
         >
           <Loader />
           {contestants &&
@@ -335,16 +335,16 @@ function Contestants() {
         </div>
 
         {/* no contestant text */}
-        {/* {searchResult && searchResult.length === 0 && (
+        {searchResult && searchResult.length === 0 && (
           <div>
             no contestant found! Please ensure you typed the correct name.
           </div>
-        )} */}
+        )}
 
         {/* leader board */}
-        {/* <div
+        <div
           className="ctsLeaderBoard"
-          // style={{ display: selectedTab !== 2 && "none" }}
+        // style={{ display: selectedTab !== 2 && "none" }}
         >
           <div className="ctsRankingCard ctsRankingHeader">
             <div className="ctsRankingCardRank"></div>
@@ -362,7 +362,7 @@ function Contestants() {
                   <div className="ctsRankingCardVotes">{cts.votes}</div>
                 </div>
               ))}
-        </div> */}
+        </div>
       </div>
       <Footer />
     </>

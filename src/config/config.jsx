@@ -1,9 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
-<<<<<<< HEAD
 import "firebase/storage";
-=======
->>>>>>> 4ab618340c1caa3fe3b89682bc2db77f22ad6c8f
 import "firebase/auth";
 
 const firebaseConfig = {
