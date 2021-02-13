@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import avatar from "../images/avatar.png";
 import { MdAddAPhoto, MdCheckCircle } from "react-icons/md";
 import ReactLoading from "react-loading";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import firebase from "firebase/app";
 import fb from "../config/config.jsx";

@@ -14,51 +14,51 @@ import { PaystackButton } from "react-paystack";
 import { v4 as uuidv4 } from "uuid";
 
 function Contestants() {
-  // const [contestants, setContestants] = useState(null);
+  const [contestants, setContestants] = useState(null);
   const [selectedTab, displayTab] = useState(1);
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedContestant, setSelectedContestant] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState();
-  const [contestants, setContestants] = useState([
-    {
-      id: "1",
-      name: "cassandra shadrack",
-      age: "19",
-      state: "rivers state",
-      votes: 2500,
-    },
-    {
-      id: "2",
-      name: "Diana prince",
-      age: "19",
-      state: "rivers state",
-      votes: 190,
-    },
-    {
-      id: "3",
-      name: "angel hart",
-      age: "19",
-      state: "rivers state",
-      votes: 87,
-    },
-  ]);
+  // const [contestants, setContestants] = useState([
+  //   {
+  //     id: "1",
+  //     name: "cassandra shadrack",
+  //     age: "19",
+  //     state: "rivers state",
+  //     votes: 2500,
+  //   },
+  //   {
+  //     id: "2",
+  //     name: "Diana prince",
+  //     age: "19",
+  //     state: "rivers state",
+  //     votes: 190,
+  //   },
+  //   {
+  //     id: "3",
+  //     name: "angel hart",
+  //     age: "19",
+  //     state: "rivers state",
+  //     votes: 87,
+  //   },
+  // ]);
 
   // fetch data
-  // useEffect(() => {
-  //   firebase
-  //     .firestore()
-  //     .collection("users")
-  //     .get()
-  //     .then((data) => {
-  //       let users = [];
-  //       data.forEach((doc) => {
-  //         users.push(doc.data());
-  //       });
-  //       setContestants(users);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("users")
+      .get()
+      .then((data) => {
+        let users = [];
+        data.forEach((doc) => {
+          users.push(doc.data());
+        });
+        setContestants(users);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const search = () => {
     let searchResult =
@@ -179,6 +179,17 @@ function Contestants() {
               .catch((error) => console.log(error));
             cts.votes += 200;
           }
+          if (cts.id === props.id && amountPaid === 15000) {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(`${cts.name}-${cts.id}`)
+              .update({
+                votes: firebase.firestore.FieldValue.increment(300),
+              })
+              .catch((error) => console.log(error));
+            cts.votes += 300;
+          }
           return cts;
         })
       );
@@ -207,10 +218,10 @@ function Contestants() {
             />
           </div>
           <div className="ctsCardDetails">
-            <div className="ctsCardDetail">
+            {/* <div className="ctsCardDetail">
               <div className="ctsCardLabel">Position</div>
               {props.position + 1}
-            </div>
+            </div> */}
             <div className="ctsCardDetail">
               <div className="ctsCardLabel">Name</div>
               {props.name}
@@ -270,6 +281,7 @@ function Contestants() {
               <option value="250000">50 votes (N2500)</option>
               <option value="500000">100 votes (N5000)</option>
               <option value="1000000">200 votes (N10000)</option>
+              <option value="1500000">300 votes (N15000)</option>
             </select>
             <PaystackButton {...componentProps} />
           </form>
@@ -282,13 +294,13 @@ function Contestants() {
     <>
       <Navbar />
       <SuccessModal {...selectedContestant} />
-      <div className="contestants section">
+      <div className="contestants section d-flex flex-column justify-content-center align-items-center">
         {/* <!-- label --> */}
         <div className="label">Contestants</div>
         <div className="labelLine"></div>
 
         {/* tab */}
-        <div className="tab">
+        <div className="tab w-100">
           <div
             onClick={() => displayTab(1)}
             className={selectedTab === 1 ? "activeTab" : ""}
@@ -305,7 +317,7 @@ function Contestants() {
 
         {/* search bar */}
         <form
-          className="ctsSearchForm"
+          className="ctsSearchForm w-100"
           style={{ display: selectedTab !== 1 && "none" }}
         >
           <input
@@ -328,7 +340,8 @@ function Contestants() {
           <Loader />
           {contestants &&
             contestants
-              .sort((a, b) => (a.votes > b.votes ? -1 : 1))
+              .filter((cts) => cts.name.toLowerCase().includes(searchValue.toLowerCase())) 
+              // .sort((a, b) => (a.votes > b.votes ? -1 : 1))
               .map((cts, i) => (
                 <ContestantCard {...cts} key={cts.id} position={i} />
               ))}
@@ -349,7 +362,7 @@ function Contestants() {
           <div className="ctsRankingCard ctsRankingHeader">
             <div className="ctsRankingCardRank"></div>
             <div className="ctsRankingCardName">name</div>
-            <div className="ctsRankingCardVotes">votes</div>
+            {/* <div className="ctsRankingCardVotes">votes</div> */}
           </div>
           <Loader />
           {contestants &&
@@ -359,7 +372,7 @@ function Contestants() {
                 <div key={cts.id} className="ctsRankingCard">
                   <div className="ctsRankingCardRank">{(i += 1)}</div>
                   <div className="ctsRankingCardName">{cts.name}</div>
-                  <div className="ctsRankingCardVotes">{cts.votes}</div>
+                  {/* <div className="ctsRankingCardVotes">{cts.votes}</div> */}
                 </div>
               ))}
         </div>
