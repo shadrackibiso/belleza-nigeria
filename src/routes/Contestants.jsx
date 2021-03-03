@@ -104,7 +104,7 @@ function Contestants() {
   const ContestantCard = (props) => {
     const [displayVoteForm, setDisplayVoteForm] = useState(false);
     // paystack payment
-    const publicKey = "pk_live_25afddd9c879b95a84956f01333bec6062ba81b8";
+    const publicKey = "pk_live_d557ee563e1b49853c870b886a36b4ca8931f819";
     // const publicKey = "pk_test_8ecbac418f27432bf99e076ae8e5e05e244499d2";
     const [amount, setAmount] = useState(5000);
     const [email, setEmail] = useState("");
@@ -340,7 +340,7 @@ function Contestants() {
           <Loader />
           {contestants &&
             contestants
-              .filter((cts) => cts.name.toLowerCase().includes(searchValue.toLowerCase())) 
+              .filter((cts) => cts.name.toLowerCase().includes(searchValue.toLowerCase()) && cts.votes >= 750) 
               // .sort((a, b) => (a.votes > b.votes ? -1 : 1))
               .map((cts, i) => (
                 <ContestantCard {...cts} key={cts.id} position={i} />
@@ -357,7 +357,7 @@ function Contestants() {
         {/* leader board */}
         <div
           className="ctsLeaderBoard"
-        // style={{ display: selectedTab !== 2 && "none" }}
+        style={{ display: selectedTab !== 2 && "none" }}
         >
           <div className="ctsRankingCard ctsRankingHeader">
             <div className="ctsRankingCardRank"></div>
@@ -367,6 +367,7 @@ function Contestants() {
           <Loader />
           {contestants &&
             contestants
+              .filter((cts) => cts.votes >= 750) 
               .sort((a, b) => (a.votes > b.votes ? -1 : 1))
               .map((cts, i) => (
                 <div key={cts.id} className="ctsRankingCard">

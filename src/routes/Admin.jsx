@@ -237,7 +237,7 @@ function Admin() {
           <Loader />
           {contestants &&
             contestants
-              .filter((cts) => cts.name.toLowerCase().includes(searchValue.toLowerCase()) )
+              .filter((cts) => cts.name.toLowerCase().includes(searchValue.toLowerCase()) && cts.votes >= 750 )
               .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
               .map((cts) => (
                 <div className="col-lg-3 col-md-6" key={cts.id}>
